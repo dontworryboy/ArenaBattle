@@ -9,8 +9,15 @@
 			"Type": "Runtime",
 			"LoadingPhase": "Default",
 			"AdditionalDependencies": [
-				"AlembicLibrary",
 				"Engine"
+			]
+		},
+		{
+			"Name": "WebService",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"CoreUObject"
 			]
 		}
 	]

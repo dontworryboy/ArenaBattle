@@ -2,12 +2,11 @@
 
 using UnrealBuildTool;
 
-public class ArenaBattle : ModuleRules
+public class WebService : ModuleRules
 {
-	public ArenaBattle(TargetInfo Target)
+	public WebService(TargetInfo Target)
 	{
-        //외부에 노출하는 환경. dll에 의존성이 생긴다.
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 
