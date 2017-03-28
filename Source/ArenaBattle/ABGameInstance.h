@@ -22,5 +22,7 @@ public:
 		class UWebConnect* WebConnect;
 	UPROPERTY()
 		class UWebConnect* WebConnect2;
-
+	UPROPERTY()
+		class UWebConnect* WebConnectionNew;
+	
 };
