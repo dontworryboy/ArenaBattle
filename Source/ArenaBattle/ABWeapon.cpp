@@ -12,7 +12,7 @@ AABWeapon::AABWeapon()
 	weapon = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("weaponMesh"));
 	RootComponent = weapon;
 
-	ConstructorHelpers::FObjectFinder<USkeletalMesh> sk_Weapon(
+	static ConstructorHelpers::FObjectFinder<USkeletalMesh> sk_Weapon(
 		TEXT("SkeletalMesh'/Game/InfinityBladeWeapons/Weapons/Blade/Swords/Blade_DragonSword/SK_Blade_DragonSword.SK_Blade_DragonSword'"));
 	weapon->SetSkeletalMesh(sk_Weapon.Object);
 }

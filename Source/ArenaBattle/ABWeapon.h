@@ -22,7 +22,14 @@ public:
 
 
 	// 변수
-	UPROPERTY()
+	//객체 타입은 visible, 밸류 타입은 edit
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "weapon")
 	class USkeletalMeshComponent* weapon;
+
+	UFUNCTION(BlueprintCallable, Category = "weapon|Stat")
+	float getDamage(){ return BaseDamage; }
+
+	UPROPERTY(BlueprintReadWrite, EditInstanceOnly, Category = "Stat", meta = (AllowPrivateAccess = "true"))
+	float BaseDamage;
 
 };
