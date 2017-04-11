@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ArenaBattle.h"
+#include "ABGameInstance.h"
 #include "ABPawn.h"
 
 
@@ -27,13 +28,26 @@ AABPawn::AABPawn()
 		SK_Mesh(TEXT("SkeletalMesh'/Game/InfinityBladeWarriors/Character/CompleteCharacters/SK_CharM_FrostGiant.SK_CharM_FrostGiant'"));
 	Mesh->SetSkeletalMesh(SK_Mesh.Object);
 	//AutoPossessPlayer = EAutoReceiveInput::Player0;
+
+	MaxHP = 100.0f;
 }
 
 // Called when the game starts or when spawned
 void AABPawn::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	CurrentHP = MaxHP;
+
+	int32 NewIndex = FMath::RandRange(0, CharacterAssets.Num() - 1);
+	UABGameInstance* ABGameInstance = Cast<UABGameInstance>(GetGameInstance());
+	if (ABGameInstance)
+	{
+		TAssetPtr<USkeletalMesh> NewCharacter = Cast<USkeletalMesh>(ABGameInstance->AssetLoader.SynchronousLoad(CharacterAssets[NewIndex]));
+		if (NewCharacter)
+		{
+			Mesh->SetSkeletalMesh(NewCharacter.Get());
+		}
+	}
 }
 
 // Called every frame

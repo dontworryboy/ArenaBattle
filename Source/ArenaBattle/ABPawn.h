@@ -5,7 +5,8 @@
 #include "GameFramework/Pawn.h"
 #include "ABPawn.generated.h"
 
-UCLASS()
+//컨텐츠 - 게임, 아키텍쳐 - 엔진
+UCLASS(config = Game)
 class ARENABATTLE_API AABPawn : public APawn
 {
 	GENERATED_BODY()
@@ -33,4 +34,15 @@ public:
 	//class USpringArmComponent* SpringArm;
 	UPROPERTY()
 	class UCameraComponent* Camera;
+
+	UPROPERTY(config, BlueprintReadWrite, EditAnywhere, Category = "Stat")
+		float MaxHP;
+
+	UPROPERTY(BlueprintReadWrite, EditInstanceOnly, Category = "Stat")
+		float CurrentHP;
+
+public:
+	//FStringAssetReference를 사용하면 경로 지정한곳에서 리소스까지 불러올 수 있다.
+	UPROPERTY(config, BlueprintReadOnly, VisibleInstanceOnly, Category = "Assets")
+	TArray<FStringAssetReference> CharacterAssets;
 };
