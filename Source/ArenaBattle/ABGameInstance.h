@@ -11,6 +11,9 @@ public:
 	TSharedPtr<FHouse> OthersDeed;
 	TWeakPtr<FHouse> AccessHouse;
 	int32 Size = 10;
+
+	UFUNCTION()
+		void RequestTokenComplete(const FString& Token){ AB_LOG(Warning, TEXT("HouseToken : %s"), *Token); }
 };
 
 /**
@@ -40,4 +43,9 @@ public:
 
 	UFUNCTION()
 		void CheckUObjectAlive();
+
+	UFUNCTION()
+		void RequestTokenComplete(const FString& Token);
+	UFUNCTION()
+		void RequestTokenComplete2(const FString& Token);
 };

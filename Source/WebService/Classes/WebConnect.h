@@ -5,6 +5,8 @@
 #include "UObject/NoExportTypes.h"
 #include "WebConnect.generated.h"
 
+DECLARE_MULTICAST_DELEGATE_OneParam(FTokenCompleteSignature, const FString&);
+
 /**
  * 
  */
@@ -23,5 +25,7 @@ public:
 		FString URI;
 
 	UFUNCTION()
-		void RequestToken();
+		void RequestToken(const FString& UserID); //const 이유 -> 받은놈은 유저ID를 변경할 수 없다.
+
+	FTokenCompleteSignature TokenCompleteDelegate;
 };

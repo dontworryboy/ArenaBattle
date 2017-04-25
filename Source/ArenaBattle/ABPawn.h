@@ -28,10 +28,10 @@ public:
 	class UCapsuleComponent* Body;
 	UPROPERTY()
 	class USkeletalMeshComponent* Mesh;
-	UPROPERTY()
+	UPROPERTY(VisibleAnywhere)
 	class UFloatingPawnMovement* Movement;
-	//UPROPERTY()
-	//class USpringArmComponent* SpringArm;
+	UPROPERTY(VisibleAnywhere)
+	class USpringArmComponent* SpringArm;
 	UPROPERTY()
 	class UCameraComponent* Camera;
 
@@ -45,4 +45,12 @@ public:
 	//FStringAssetReference를 사용하면 경로 지정한곳에서 리소스까지 불러올 수 있다.
 	UPROPERTY(config, BlueprintReadOnly, VisibleInstanceOnly, Category = "Assets")
 	TArray<FStringAssetReference> CharacterAssets;
+
+	float CurrentLeftRightVal;
+	float CurrentUpDownVal;
+
+	UFUNCTION()
+		void UpDownInput(float NewInputVal);
+	UFUNCTION()
+		void LeftRightInput(float NewInputVal);
 };
