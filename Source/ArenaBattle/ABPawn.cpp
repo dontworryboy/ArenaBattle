@@ -74,7 +74,7 @@ void AABPawn::Tick( float DeltaTime )
 	{
 		FRotator TargetRotation = UKismetMathLibrary::MakeRotFromX(InputVector);
 		SetActorRotation(TargetRotation);
-		AddMovementInput(GetActorForwardVector(),);
+		AddMovementInput(GetActorForwardVector());
 	}
 }
 

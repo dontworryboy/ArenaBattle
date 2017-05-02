@@ -29,10 +29,8 @@ public:
 
 	virtual void Init() override;
 	
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "WebService")
 		class UWebConnect* WebConnect;
-	UPROPERTY()
-		class UWebConnect* WebConnect2;
 	//UPROPERTY()
 		class UWebConnect* WebConnectionNew;
 	//스트리밍 되는 애셋을 관리할 오브젝트
@@ -46,6 +44,10 @@ public:
 
 	UFUNCTION()
 		void RequestTokenComplete(const FString& Token);
+
 	UFUNCTION()
 		void RequestTokenComplete2(const FString& Token);
+
+	UFUNCTION()
+	void OverloadingTest() {}
 };
