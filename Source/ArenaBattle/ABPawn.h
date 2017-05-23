@@ -5,6 +5,13 @@
 #include "GameFramework/Pawn.h"
 #include "ABPawn.generated.h"
 
+UENUM(BlueprintType)
+enum class EPlayerState : uint8
+{
+	PEACE,
+	BATTLE
+};
+
 //컨텐츠 - 게임, 아키텍쳐 - 엔진
 UCLASS(config = Game)
 class ARENABATTLE_API AABPawn : public APawn
@@ -26,7 +33,7 @@ public:
 
 	UPROPERTY()
 	class UCapsuleComponent* Body;
-	UPROPERTY()
+	UPROPERTY(VisibleAnywhere)
 	class USkeletalMeshComponent* Mesh;
 	UPROPERTY(VisibleAnywhere)
 	class UFloatingPawnMovement* Movement;
@@ -48,9 +55,14 @@ public:
 
 	float CurrentLeftRightVal;
 	float CurrentUpDownVal;
+	EPlayerState CurrentState;
 
 	UFUNCTION()
 		void UpDownInput(float NewInputVal);
 	UFUNCTION()
 		void LeftRightInput(float NewInputVal);
+	UFUNCTION()
+		void OnPressNormalAttack();
+	UFUNCTION()
+		void OnReleaseNormalAttack();
 };

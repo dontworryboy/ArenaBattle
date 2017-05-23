@@ -44,6 +44,8 @@ AABPawn::AABPawn()
 	//AutoPossessPlayer = EAutoReceiveInput::Player0;
 
 	MaxHP = 100.0f;
+
+	CurrentState = EPlayerState::PEACE;
 }
 
 // Called when the game starts or when spawned
@@ -68,14 +70,24 @@ void AABPawn::BeginPlay()
 void AABPawn::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
-
 	FVector InputVector = FVector(CurrentUpDownVal, CurrentLeftRightVal, 0.0F);
-	if (InputVector.SizeSquared() > 0.0F)
+	
+	switch (CurrentState)
 	{
-		FRotator TargetRotation = UKismetMathLibrary::MakeRotFromX(InputVector);
-		SetActorRotation(TargetRotation);
-		AddMovementInput(GetActorForwardVector());
+	case EPlayerState::PEACE:
+	{
+		if (InputVector.SizeSquared() > 0.0F)
+		{
+			FRotator TargetRotation = UKismetMathLibrary::MakeRotFromX(InputVector);
+			SetActorRotation(TargetRotation);
+			AddMovementInput(GetActorForwardVector());
+		}
+		break;
 	}
+	case EPlayerState::BATTLE:
+		break;
+	}
+	
 }
 
 // Called to bind functionality to input
@@ -85,6 +97,8 @@ void AABPawn::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 
 	InputComponent->BindAxis("LeftRight", this, &AABPawn::LeftRightInput);
 	InputComponent->BindAxis("UpDown", this, &AABPawn::UpDownInput);
+	InputComponent->BindAction("NormalAttack", EInputEvent::IE_Pressed, this, &AABPawn::OnPressNormalAttack);
+	//InputComponent->BindAction("NormalAttack", EInputEvent::IE_Released, this, &AABPawn::OnPressNormalAttack);
 }
 
 void AABPawn::UpDownInput(float NewInputVal)
@@ -95,5 +109,15 @@ void AABPawn::UpDownInput(float NewInputVal)
 void AABPawn::LeftRightInput(float NewInputVal)
 {
 	CurrentLeftRightVal = NewInputVal;
+}
+
+void AABPawn::OnPressNormalAttack()
+{
+	AB_LOG_CALLONLY(Warning);
+	CurrentState = EPlayerState::BATTLE;
+}
+
+void AABPawn::OnReleaseNormalAttack()
+{
 }
 
